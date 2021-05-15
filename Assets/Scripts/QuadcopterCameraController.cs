@@ -21,6 +21,11 @@ public class QuadcopterCameraController: AbstractCameraController
         this.MarkerLength = 5.0f;
         this.MarkerWidth = 5.0f;
         this.Target.transform.Rotate(0.0f, -90.0f, 0.0f, Space.Self);
+        var light = GameObject.Find("Light");
+        if(light)
+        {
+            Destroy(light);
+        }
     }
 
     public void LateUpdate()
