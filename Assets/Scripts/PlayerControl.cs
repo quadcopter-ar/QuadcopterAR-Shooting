@@ -31,7 +31,18 @@ public class PlayerControl : MonoBehaviour
     {
         this.MovementDirection = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0.0f);
         this.gameObject.GetComponent<MissileLauncher>().SetFireDirection(this.MovementDirection);
-        // this.gameObject.transform.localRotation = Quaternion.Euler(this.MovementDirection * Time.deltaTime * (this.ModifiedSpeed+this.Speed));
+        // var targetX = this.gameObject.transform.rotation.x + (this.MovementDirection * Time.deltaTime * (this.ModifiedSpeed+this.Speed)).x;
+        // var targetY = this.gameObject.transform.rotation.y + (this.MovementDirection * Time.deltaTime * (this.ModifiedSpeed+this.Speed)).y;
+        // var targetZ = this.gameObject.transform.rotation.z + (this.MovementDirection * Time.deltaTime * (this.ModifiedSpeed+this.Speed)).z;
+        // this.gameObject.transform.rotation = Quaternion.Euler(targetX, targetY, targetZ);
+        // this.gameObject.transform.rotation.x += 10.0f;
+        // this.MainCamera.transform.rotation.x += 10.0f;
+        this.gameObject.transform.RotateAround(this.MainCamera.transform.position, this.MovementDirection, (this.ModifiedSpeed + this.Speed) * Time.deltaTime);
+        this.MainCamera.transform.RotateAround(this.MainCamera.transform.position, this.MovementDirection, (this.ModifiedSpeed + this.Speed) * Time.deltaTime);
+        // var cameraX = this.MainCamera.transform.rotation.x + (this.MovementDirection * Time.deltaTime * (this.ModifiedSpeed+this.Speed)).x;
+        // var cameraY = this.MainCamera.transform.rotation.y + (this.MovementDirection * Time.deltaTime * (this.ModifiedSpeed+this.Speed)).y;
+        // var cameraZ = this.MainCamera.transform.rotation.z + (this.MovementDirection * Time.deltaTime * (this.ModifiedSpeed+this.Speed)).z;
+        // this.MainCamera.transform.rotation = Quaternion.Euler(cameraX, cameraY, cameraZ);
         // this.MainCamera.transform.localRotation = Quaternion.Euler(this.MovementDirection * Time.deltaTime * (this.ModifiedSpeed+this.Speed));
     }
 }
