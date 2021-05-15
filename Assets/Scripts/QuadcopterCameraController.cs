@@ -18,8 +18,8 @@ public class QuadcopterCameraController: AbstractCameraController
         this.AttachCamera();
         this.CameraLogicCenter = new Vector3(0.0f,0.0f,this.Target.transform.position.z - this.transform.position.z);
         this.MarkerCenter = new Vector3(0.0f,0.0f,0.0f);
-        this.MarkerLength = 5.0f;
-        this.MarkerWidth = 5.0f;
+        this.MarkerLength = 2.0f;
+        this.MarkerWidth = 2.0f;
         this.Target.transform.Rotate(0.0f, -90.0f, 0.0f, Space.Self);
         var light = GameObject.Find("Light");
         if(light)
@@ -46,23 +46,26 @@ public class QuadcopterCameraController: AbstractCameraController
     {
         var target = this.Target.transform.position;
         this.ManagedCamera.transform.position = new Vector3(target.x, target.y + 12.0f, target.z - 39.0f);
-        Debug.Log(this.Target.transform.position);
+        // Debug.Log(this.Target.transform.position);
     }
 
     public override void DrawCameraLogic()
     {
-        var playerZCameraCoordinate = this.Target.transform.position.z - this.transform.position.z - 39.0f;
+        var playerZCameraCoordinate = this.Target.transform.position.z - this.transform.position.z;
         this.MarkerCenter.z = playerZCameraCoordinate;
-        this.MarkerCenter.y += 12;
+        // this.MarkerCenter.y += 12;
 
-        this.CameraLineRenderer.positionCount = 5;
+        this.CameraLineRenderer.positionCount = 7;
         this.CameraLineRenderer.useWorldSpace = false;
         this.CameraLineRenderer.material = new Material(Shader.Find("Sprites/Default"));
-        this.CameraLineRenderer.material.color = Color.white;
+        this.CameraLineRenderer.material.color = Color.green;
+        this.CameraLineRenderer.SetWidth(0.3f, 0.3f);
         this.CameraLineRenderer.SetPosition(0, new Vector3(this.MarkerCenter.x - this.MarkerWidth/2, this.MarkerCenter.y, this.MarkerCenter.z));
-        this.CameraLineRenderer.SetPosition(1, new Vector3(this.MarkerCenter.x + this.MarkerWidth/2, this.MarkerCenter.y, this.MarkerCenter.z));
-        this.CameraLineRenderer.SetPosition(2, this.MarkerCenter);
-        this.CameraLineRenderer.SetPosition(3, new Vector3(this.MarkerCenter.x, this.MarkerCenter.y - this.MarkerLength/2, this.MarkerCenter.z));
-        this.CameraLineRenderer.SetPosition(4, new Vector3(this.MarkerCenter.x, this.MarkerCenter.y + this.MarkerLength/2, this.MarkerCenter.z));     
+        this.CameraLineRenderer.SetPosition(1, this.MarkerCenter);
+        this.CameraLineRenderer.SetPosition(2, new Vector3(this.MarkerCenter.x + this.MarkerWidth/2, this.MarkerCenter.y, this.MarkerCenter.z));
+        this.CameraLineRenderer.SetPosition(3, this.MarkerCenter);
+        this.CameraLineRenderer.SetPosition(4, new Vector3(this.MarkerCenter.x, this.MarkerCenter.y - this.MarkerLength/2, this.MarkerCenter.z));
+        this.CameraLineRenderer.SetPosition(5, this.MarkerCenter);
+        this.CameraLineRenderer.SetPosition(6, new Vector3(this.MarkerCenter.x, this.MarkerCenter.y + this.MarkerLength/2, this.MarkerCenter.z));     
     }
 }

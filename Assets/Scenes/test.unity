@@ -252,7 +252,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 505ff0c261bc24a838467a20d2d11f6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DrawLogic: 0
+  DrawLogic: 1
   Target: {fileID: 71362125}
 --- !u!120 &604573294
 LineRenderer:
