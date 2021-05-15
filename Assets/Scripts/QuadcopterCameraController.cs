@@ -15,9 +15,10 @@ public class QuadcopterCameraController: AbstractCameraController
     {
         this.ManagedCamera = this.gameObject.GetComponent<Camera>();
         this.CameraLineRenderer = this.gameObject.GetComponent<LineRenderer>();
+        var target = this.Target.transform.position;
         // this.AttachCamera();
         this.CameraLogicCenter = new Vector3(0.0f,0.0f,this.Target.transform.position.z - this.transform.position.z);
-        this.MarkerCenter = new Vector3(0.0f,0.0f,0.0f);
+        this.MarkerCenter = this.ManagedCamera.transform.position;
         this.MarkerLength = 2.0f;
         this.MarkerWidth = 2.0f;
         var light = GameObject.Find("Light");
@@ -25,7 +26,7 @@ public class QuadcopterCameraController: AbstractCameraController
         {
             Destroy(light);
         }
-        var target = this.Target.transform.position;
+        
         this.ManagedCamera.transform.position = new Vector3(target.x, target.y + 10.0f, target.z - 30.0f);
         this.Target.transform.Rotate(new Vector3(0.0f,270.0f,0.0f));
         // this.ManagedCamera.transform.rotation = Quaternion.Euler(0.0f,0.0f,0.0f);
@@ -54,12 +55,12 @@ public class QuadcopterCameraController: AbstractCameraController
 
     public override void DrawCameraLogic()
     {
-        var playerZCameraCoordinate = this.Target.transform.position.z - this.transform.position.z;
-        this.MarkerCenter.z = playerZCameraCoordinate;
+        this.MarkerCenter = this.ManagedCamera.transform.position;
+        
         // this.MarkerCenter.y += 12;
 
         this.CameraLineRenderer.positionCount = 7;
-        this.CameraLineRenderer.useWorldSpace = false;
+        this.CameraLineRenderer.useWorldSpace = true;
         this.CameraLineRenderer.material = new Material(Shader.Find("Sprites/Default"));
         this.CameraLineRenderer.material.color = Color.green;
         this.CameraLineRenderer.SetWidth(0.3f, 0.3f);
