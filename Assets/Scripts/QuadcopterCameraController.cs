@@ -3,18 +3,24 @@ using System.Collections.Generic;
 using UnityEngine;
 using QuadcopterVR;
 
-public class QuadcopterCameraController
+public class QuadcopterCameraController: AbstractCameraController
 {
     private Camera ManagedCamera;
     private LineRenderer CameraLineRenderer;
-    private GameObject Target;
     private Vector3 CameraLogicCenter;
+    private float MarkerLength;
+    private float MarkerWidth;
+    private Vector3 MarkerCenter;
     public void Awake()
     {
         this.ManagedCamera = this.gameObject.GetComponent<Camera>();
         this.CameraLineRenderer = this.gameObject.GetComponent<LineRenderer>();
         this.AttachCamera();
-        this.CameraLogicCenter = Vector3(0.0f,0.0f,this.Target.transform.position.z - this.transform.position.z);
+        this.CameraLogicCenter = new Vector3(0.0f,0.0f,this.Target.transform.position.z - this.transform.position.z);
+        this.MarkerCenter = new Vector3(0.0f,0.0f,0.0f);
+        this.MarkerLength = 5.0f;
+        this.MarkerWidth = 5.0f;
+        this.Target.transform.Rotate(0.0f, -90.0f, 0.0f, Space.Self);
     }
 
     public void LateUpdate()
@@ -31,15 +37,18 @@ public class QuadcopterCameraController
         this.AttachCamera();
         this.DrawCameraLogic();
     }
-    public void AttachCamera()
+    public override void AttachCamera()
     {
-        this.Target.transform.position = this.ManagedCamera.main.ScreenToWorldPoint(Vector3(Screen.width/2, Screen.height/2, this.ManagedCamera.main.nearClipPlane));
+        var target = this.Target.transform.position;
+        this.ManagedCamera.transform.position = new Vector3(target.x, target.y + 12.0f, target.z - 39.0f);
+        Debug.Log(this.Target.transform.position);
     }
 
-    public void DrawCameraLogic()
+    public override void DrawCameraLogic()
     {
-        var playerZCameraCoordinate = this.Target.transform.position.z - this.transform.position.z;
+        var playerZCameraCoordinate = this.Target.transform.position.z - this.transform.position.z - 39.0f;
         this.MarkerCenter.z = playerZCameraCoordinate;
+        this.MarkerCenter.y += 12;
 
         this.CameraLineRenderer.positionCount = 5;
         this.CameraLineRenderer.useWorldSpace = false;
