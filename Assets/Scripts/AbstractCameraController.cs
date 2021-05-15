@@ -13,7 +13,7 @@ namespace QuadcopterVR
         [SerializeField]
         protected GameObject Target;
 
-        public abstract void AttachCamera();
+        // public abstract void AttachCamera();
         public abstract void DrawCameraLogic();
 
     }

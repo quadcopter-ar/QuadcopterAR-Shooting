@@ -15,7 +15,7 @@ public class QuadcopterCameraController: AbstractCameraController
     {
         this.ManagedCamera = this.gameObject.GetComponent<Camera>();
         this.CameraLineRenderer = this.gameObject.GetComponent<LineRenderer>();
-        this.AttachCamera();
+        // this.AttachCamera();
         this.CameraLogicCenter = new Vector3(0.0f,0.0f,this.Target.transform.position.z - this.transform.position.z);
         this.MarkerCenter = new Vector3(0.0f,0.0f,0.0f);
         this.MarkerLength = 2.0f;
@@ -25,6 +25,12 @@ public class QuadcopterCameraController: AbstractCameraController
         {
             Destroy(light);
         }
+        var target = this.Target.transform.position;
+        this.ManagedCamera.transform.position = new Vector3(target.x, target.y + 10.0f, target.z - 30.0f);
+        this.Target.transform.Rotate(new Vector3(0.0f,270.0f,0.0f));
+        // this.ManagedCamera.transform.rotation = Quaternion.Euler(0.0f,0.0f,0.0f);
+        // this.Target.transform.rotation = Quaternion.Euler(0.0f,270.0f,0.0f);
+
     }
 
     public void LateUpdate()
@@ -38,15 +44,13 @@ public class QuadcopterCameraController: AbstractCameraController
         {
             this.CameraLineRenderer.enabled = false;
         }
-        this.AttachCamera();
+        // this.AttachCamera();
         this.DrawCameraLogic();
     }
-    public override void AttachCamera()
-    {
-        var target = this.Target.transform.position;
-        this.ManagedCamera.transform.position = new Vector3(target.x, target.y + 12.0f, target.z - 39.0f);
-        // Debug.Log(this.Target.transform.position);
-    }
+    // public override void AttachCamera()
+    // {
+
+    // }
 
     public override void DrawCameraLogic()
     {

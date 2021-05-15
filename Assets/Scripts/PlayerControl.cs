@@ -7,6 +7,8 @@ public class PlayerControl : MonoBehaviour
     private float Speed;
     private float ModifiedSpeed;
     private Vector3 MovementDirection;
+    [SerializeField]
+    private Camera MainCamera;
 
     void Awake()
     {
@@ -29,6 +31,7 @@ public class PlayerControl : MonoBehaviour
     {
         this.MovementDirection = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0.0f);
         this.gameObject.GetComponent<MissileLauncher>().SetFireDirection(this.MovementDirection);
-        this.gameObject.transform.Translate(this.MovementDirection * Time.deltaTime * (this.ModifiedSpeed+this.Speed));
+        // this.gameObject.transform.localRotation = Quaternion.Euler(this.MovementDirection * Time.deltaTime * (this.ModifiedSpeed+this.Speed));
+        // this.MainCamera.transform.localRotation = Quaternion.Euler(this.MovementDirection * Time.deltaTime * (this.ModifiedSpeed+this.Speed));
     }
 }
