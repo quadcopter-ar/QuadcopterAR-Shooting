@@ -18,7 +18,7 @@ public class QuadcopterCameraController: AbstractCameraController
         var target = this.Target.transform.position;
         // this.AttachCamera();
         this.CameraLogicCenter = new Vector3(0.0f,0.0f,this.Target.transform.position.z - this.transform.position.z);
-        this.MarkerCenter = this.ManagedCamera.transform.position;
+        this.MarkerCenter = new Vector3(0.0f, 0.0f, 0.0f);
         this.MarkerLength = 2.0f;
         this.MarkerWidth = 2.0f;
         var light = GameObject.Find("Light");
@@ -55,12 +55,10 @@ public class QuadcopterCameraController: AbstractCameraController
 
     public override void DrawCameraLogic()
     {
-        this.MarkerCenter = this.ManagedCamera.transform.position;
-        
-        // this.MarkerCenter.y += 12;
 
+        // this.MarkerCenter = Quaternion.AngleAxis(this.ManagedCamera.transform.rotation) * this.MarkerCenter;
         this.CameraLineRenderer.positionCount = 7;
-        this.CameraLineRenderer.useWorldSpace = true;
+        this.CameraLineRenderer.useWorldSpace = false;
         this.CameraLineRenderer.material = new Material(Shader.Find("Sprites/Default"));
         this.CameraLineRenderer.material.color = Color.green;
         this.CameraLineRenderer.SetWidth(0.3f, 0.3f);
@@ -71,5 +69,6 @@ public class QuadcopterCameraController: AbstractCameraController
         this.CameraLineRenderer.SetPosition(4, new Vector3(this.MarkerCenter.x, this.MarkerCenter.y - this.MarkerLength/2, this.MarkerCenter.z));
         this.CameraLineRenderer.SetPosition(5, this.MarkerCenter);
         this.CameraLineRenderer.SetPosition(6, new Vector3(this.MarkerCenter.x, this.MarkerCenter.y + this.MarkerLength/2, this.MarkerCenter.z));     
+
     }
 }
