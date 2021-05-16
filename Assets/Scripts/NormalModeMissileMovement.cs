@@ -12,7 +12,7 @@ public class NormalModeMissileMovement : AbstractMissileMovement
     public override void Fire()
     {
         this.GetComponent<Rigidbody>().AddForce(this.FireDirection*this.Speed);
-        Debug.Log(this.FireDirection*this.Speed);
+        // Debug.Log(this.FireDirection*this.Speed);
     }
 
     public void SetFireDirection(Vector3 fireDirection)
