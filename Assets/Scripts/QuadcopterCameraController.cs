@@ -36,17 +36,17 @@ public class QuadcopterCameraController: AbstractCameraController
 
     public void LateUpdate()
     {
-        if (this.DrawLogic)
-        {
-            this.CameraLineRenderer.enabled = true;
-            this.DrawCameraLogic();
-        }
-        else
-        {
-            this.CameraLineRenderer.enabled = false;
-        }
+        // if (this.DrawLogic)
+        // {
+        //     this.CameraLineRenderer.enabled = true;
+        //     this.DrawCameraLogic();
+        // }
+        // else
+        // {
+        //     this.CameraLineRenderer.enabled = false;
+        // }
         // this.AttachCamera();
-        this.DrawCameraLogic();
+        // this.DrawCameraLogic();
     }
     // public override void AttachCamera()
     // {
