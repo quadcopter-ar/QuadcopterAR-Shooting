@@ -29,7 +29,7 @@ public class PlayerControl : MonoBehaviour
 
     void Update()
     {
-        this.MovementDirection = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0.0f);
+        this.MovementDirection = new Vector3(Input.GetAxis("Horizontal"), 0.0f, 0.0f);
         this.gameObject.GetComponent<MissileLauncher>().SetFireDirection(this.MovementDirection);
         // var targetX = this.gameObject.transform.rotation.x + (this.MovementDirection * Time.deltaTime * (this.ModifiedSpeed+this.Speed)).x;
         // var targetY = this.gameObject.transform.rotation.y + (this.MovementDirection * Time.deltaTime * (this.ModifiedSpeed+this.Speed)).y;
