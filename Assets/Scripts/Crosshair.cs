@@ -33,7 +33,7 @@ public class Crosshair : MonoBehaviour
         }
 
         this.Reticle.sizeDelta = new Vector2(this.CurrentFireSize,this.CurrentFireSize);
-        Debug.Log(this.CurrentFireSize);
+        // Debug.Log(this.CurrentFireSize);
         // Debug.Log(this.OpenFireSize);
     }
 
