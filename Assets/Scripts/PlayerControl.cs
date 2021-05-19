@@ -38,7 +38,7 @@ public class PlayerControl : MonoBehaviour
         // this.gameObject.transform.rotation.x += 10.0f;
         // this.MainCamera.transform.rotation.x += 10.0f;
         this.gameObject.transform.RotateAround(this.MainCamera.transform.position, this.MovementDirection, (this.ModifiedSpeed + this.Speed) * Time.deltaTime);
-        this.MainCamera.transform.RotateAround(this.MainCamera.transform.position, this.MovementDirection, (this.ModifiedSpeed + this.Speed) * Time.deltaTime);
+        // this.MainCamera.transform.RotateAround(this.MainCamera.transform.position, this.MovementDirection, (this.ModifiedSpeed + this.Speed) * Time.deltaTime);
         // var cameraX = this.MainCamera.transform.rotation.x + (this.MovementDirection * Time.deltaTime * (this.ModifiedSpeed+this.Speed)).x;
         // var cameraY = this.MainCamera.transform.rotation.y + (this.MovementDirection * Time.deltaTime * (this.ModifiedSpeed+this.Speed)).y;
         // var cameraZ = this.MainCamera.transform.rotation.z + (this.MovementDirection * Time.deltaTime * (this.ModifiedSpeed+this.Speed)).z;
