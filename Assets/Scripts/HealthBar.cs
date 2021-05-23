@@ -50,7 +50,7 @@ public class HealthBar : MonoBehaviour
         }
 
         this.SetHealth(this.CurrentHealth);
-        Debug.Log(this.CurrentHealth);
+        //Debug.Log(this.CurrentHealth);
     }
     
 }

@@ -5,6 +5,12 @@ using QuadcopterVR;
 
 public class QuadcopterCameraController: AbstractCameraController
 {
+
+    private float OffsetX;
+
+    private float OffsetY;
+
+    private float OffsetZ;
     private Camera ManagedCamera;
     private LineRenderer CameraLineRenderer;
     private Vector3 CameraLogicCenter;
@@ -21,13 +27,14 @@ public class QuadcopterCameraController: AbstractCameraController
         this.MarkerCenter = new Vector3(0.0f, 0.0f, 0.0f);
         this.MarkerLength = 2.0f;
         this.MarkerWidth = 2.0f;
+
         var light = GameObject.Find("Light");
         if(light)
         {
             Destroy(light);
         }
         
-        this.ManagedCamera.transform.position = new Vector3(target.x - 5.0f, target.y + 10.0f, target.z - 20.0f);
+        this.ManagedCamera.transform.localPosition = new Vector3(565.0f, 284.0f, 1054.0f);
         // this.Target.transform.Rotate(new Vector3(0.0f,270.0f,0.0f));
         // this.ManagedCamera.transform.rotation = Quaternion.Euler(0.0f,0.0f,0.0f);
         // this.Target.transform.rotation = Quaternion.Euler(0.0f,270.0f,0.0f);
