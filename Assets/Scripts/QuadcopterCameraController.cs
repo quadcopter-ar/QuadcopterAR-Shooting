@@ -34,7 +34,7 @@ public class QuadcopterCameraController: AbstractCameraController
             Destroy(light);
         }
         
-        this.ManagedCamera.transform.localPosition = new Vector3(565.0f, 284.0f, 1054.0f);
+        // this.ManagedCamera.transform.localPosition = new Vector3(565.0f, 284.0f, 1054.0f);
         // this.Target.transform.Rotate(new Vector3(0.0f,270.0f,0.0f));
         // this.ManagedCamera.transform.rotation = Quaternion.Euler(0.0f,0.0f,0.0f);
         // this.Target.transform.rotation = Quaternion.Euler(0.0f,270.0f,0.0f);
