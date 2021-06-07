@@ -28,7 +28,7 @@ public class BasicMovement : MonoBehaviour
         }else{
           gamepad = Gamepad.current;
           if(gamepad == null){
-            Debug.LogError("No gamepad connected");
+            // Debug.LogError("No gamepad connected");
             return;
           }
         }
@@ -46,6 +46,10 @@ public class BasicMovement : MonoBehaviour
 
             CheckForChanges();
         }else{
+          if(gamepad == null)
+          {
+            return;
+          }
           Vector2 leftStick = gamepad.leftStick.ReadValue();
           Vector2 rightStick = gamepad.rightStick.ReadValue();
 

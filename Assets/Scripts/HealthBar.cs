@@ -2,12 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System;
 
 public class HealthBar : MonoBehaviour
 {
     [SerializeField]
     private Image ImageHealthBar;
     
+    [SerializeField]
+    private Text SuccessFailMessage;
     private float currentHealth;
     private float TimeElapse;
     public float CurrentHealth{
@@ -20,6 +23,16 @@ public class HealthBar : MonoBehaviour
             if(value<=1 && value>=0)
             {
                 this.currentHealth = value;
+                if(Math.Round(value*100.0f, 0) == 0)
+                {
+                    this.SuccessFailMessage.text = "Fail!";
+                    Application.Quit();
+                }
+                else
+                {
+                    this.SuccessFailMessage.text = "Power: " + Math.Round(value*100.0f, 0).ToString() + "%";
+                    // Debug.Log(value);
+                }
             }
         }
     }
@@ -39,6 +52,7 @@ public class HealthBar : MonoBehaviour
 
     void Update()
     {
+
         if(this.TimeElapse<1)
         {
             this.TimeElapse += Time.deltaTime;
