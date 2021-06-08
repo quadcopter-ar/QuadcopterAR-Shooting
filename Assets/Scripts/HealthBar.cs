@@ -13,6 +13,7 @@ public class HealthBar : MonoBehaviour
     private Text SuccessFailMessage;
     private float currentHealth;
     private float TimeElapse;
+    private float TotalTimeElapse;
     public float CurrentHealth{
         get
         {
@@ -25,8 +26,7 @@ public class HealthBar : MonoBehaviour
                 this.currentHealth = value;
                 if(Math.Round(value*100.0f, 0) == 0)
                 {
-                    this.SuccessFailMessage.text = "Fail!";
-                    Application.Quit();
+                    this.SetFail();
                 }
                 else
                 {
@@ -35,6 +35,18 @@ public class HealthBar : MonoBehaviour
                 }
             }
         }
+    }
+
+    public void SetSuccess()
+    {
+        this.SuccessFailMessage.text = "Sucess!";
+        Application.Quit();
+    }
+
+    public void SetFail()
+    {
+        this.SuccessFailMessage.text = "Fail!";
+        Application.Quit();
     }
 
     public void SetHealth(float health)
@@ -46,25 +58,37 @@ public class HealthBar : MonoBehaviour
     {
         this.CurrentHealth = 1.0f;
         this.TimeElapse = 0.0f;
+        this.TotalTimeElapse = 0.0f;
         this.SetHealth(this.CurrentHealth);
 
     }
 
     void Update()
     {
+        this.TotalTimeElapse += Time.deltaTime;
 
-        if(this.TimeElapse<1)
+        if(this.TotalTimeElapse <= 6.0f)
         {
-            this.TimeElapse += Time.deltaTime;
+        
+            this.SuccessFailMessage.text = "Captain! Our shield generator is hit and losing power! \n The shields are the only thing between the enemy's weapons and us. \n We have to take them out before the shield depletes completely or it's all over!";
+
         }
         else
         {
-            this.CurrentHealth -= 0.01f;
-            this.TimeElapse = 0.0f;
+            if(this.TimeElapse<1)
+            {
+                this.TimeElapse += Time.deltaTime;
+            }
+            else
+            {
+                this.CurrentHealth -= 0.01f;
+                this.TimeElapse = 0.0f;
+            }
+
+            this.SetHealth(this.CurrentHealth);
+            //Debug.Log(this.CurrentHealth);
         }
 
-        this.SetHealth(this.CurrentHealth);
-        //Debug.Log(this.CurrentHealth);
     }
     
 }
