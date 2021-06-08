@@ -21,10 +21,15 @@ public class MissileLauncher : MonoBehaviour
     {
         if(Input.GetButtonDown("Jump"))
         {
-            GameObject missle = (GameObject)Instantiate(this.Missle, this.gameObject.transform.position, Quaternion.identity);
+            GameObject player = GameObject.FindWithTag("PlayerMain");
+            Transform cameraRotation = player.transform;
+            GameObject missle = (GameObject)Instantiate(this.Missle, this.gameObject.transform.position, cameraRotation.rotation);
+            missle.transform.Rotate(27.63f, 0, 0);
             // missle.tag = "Missle";
-            missle.GetComponent<NormalModeMissileMovement>().SetFireDirection(this.FireDirection);
-            missle.GetComponent<NormalModeMissileMovement>().Fire();
+            //missle.GetComponent<NormalModeMissileMovement>().SetFireDirection(this.FireDirection);
+            Transform rotation = this.gameObject.transform;
+
+            missle.GetComponent<NormalModeMissileMovement>().Fire(rotation);
             Destroy(missle,15f);
         }
     }
