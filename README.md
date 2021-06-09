@@ -1,10 +1,10 @@
-#ECS 189L Final Project: VR Quadcopter Game Dev
+# ECS 189L Final Project: VR Quadcopter Game Dev
 
-###Authors:
+### Authors:
 - Aziz Nassar, afnassar@ucdavis.edu
 - Shikun Huang, kunhuang@ucdavis.edu
 
-##Our project document is in the main folder of the repo under the name `ProjectDocument.md`. Please check that for an overview of our game.
+## Our project document is in the main folder of the repo under the name `ProjectDocument.md`. Please check that for an overview of our game.
 
 
 
