@@ -6,10 +6,13 @@ public class MissileLauncher : MonoBehaviour
 {
     [SerializeField] private GameObject Missle;
     private Vector3 FireDirection;
+    private AudioSource audioLocal;
 
     void Awake()
     {
         this.FireDirection = new Vector3(0.0f,0.0f,0.0f);
+        audioLocal = gameObject.AddComponent<AudioSource>();
+        audioLocal.volume = 0.5f;
     }
 
     public void SetFireDirection(Vector3 fireDirection)
@@ -21,10 +24,31 @@ public class MissileLauncher : MonoBehaviour
     {
         if(Input.GetButtonDown("Jump"))
         {
-            GameObject missle = (GameObject)Instantiate(this.Missle, this.gameObject.transform.position, Quaternion.identity);
+            GameObject player = GameObject.FindWithTag("PlayerMain");
+            Transform cameraRotation = player.transform;
+
+
+            AudioClip playedSound = Resources.Load("MissileSoundEffect", typeof(AudioClip)) as AudioClip;
+            AudioSource audio = this.GetComponent<AudioSource>();
+            audio.volume = 0.5f;
+            //source.PlayOneShot(playedSound);
+            audio.clip = playedSound;
+            audio.Play();
+            audio.PlayOneShot(playedSound);
+
+            audioLocal.clip = playedSound;
+            audioLocal.PlayOneShot(playedSound);
+            audioLocal.Play();
+
+
+
+            GameObject missle = (GameObject)Instantiate(this.Missle, this.gameObject.transform.position, cameraRotation.rotation);
+            missle.transform.Rotate(27.63f, 0, 0);
             // missle.tag = "Missle";
-            missle.GetComponent<NormalModeMissileMovement>().SetFireDirection(this.FireDirection);
-            missle.GetComponent<NormalModeMissileMovement>().Fire();
+            //missle.GetComponent<NormalModeMissileMovement>().SetFireDirection(this.FireDirection);
+            Transform rotation = this.gameObject.transform;
+
+            missle.GetComponent<NormalModeMissileMovement>().Fire(rotation);
             Destroy(missle,15f);
         }
     }

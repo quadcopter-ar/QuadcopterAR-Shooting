@@ -11,7 +11,7 @@ namespace MissleFactory
         
         protected float Speed;
         protected Vector3 FireDirection;
-        public abstract void Fire();
+        public abstract void Fire(Transform rotation);
 
     }
 
