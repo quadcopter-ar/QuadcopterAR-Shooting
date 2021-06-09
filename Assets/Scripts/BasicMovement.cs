@@ -20,10 +20,18 @@ public class BasicMovement : MonoBehaviour
 
     private Gamepad gamepad;
 
+    private AudioSource mainAudio;
+
 
     void Start() {
         //Lets get all the devices we can find.
-        if(!debugMode){
+        mainAudio = gameObject.AddComponent<AudioSource>();
+        mainAudio.volume = 0.7f;
+        AudioClip playedSound = Resources.Load("ThemeMusic", typeof(AudioClip)) as AudioClip;
+        mainAudio.clip = playedSound;
+        mainAudio.PlayOneShot(playedSound);
+
+        if (!debugMode){
           GetDevices();
         }else{
           gamepad = Gamepad.current;
