@@ -57,7 +57,7 @@ The following are the relevant fbx objects (unfortunately, due to the fact that 
 - `console` : spaceship fbx object imported from blender after the 3d model is developed and render
 
 
-![console image](https://github.com/quadcopter-ar/QuadcopterAR-Shooting/blob/master/images/console.png raw=true)
+![console image](https://github.com/quadcopter-ar/QuadcopterAR-Shooting/blob/master/images/console.png?raw=true)
 
 ```
 
@@ -67,7 +67,7 @@ The following are the relevant fbx objects (unfortunately, due to the fact that 
 
 - `missile`: missile fbx object imported from blender after the 3d model is developed and render
 
-![console image](https://github.com/quadcopter-ar/QuadcopterAR-Shooting/blob/master/images/console.png raw=true)
+![console image](https://github.com/quadcopter-ar/QuadcopterAR-Shooting/blob/master/images/missile.png?raw=true)
 
 ## Movement/Physics
 
