@@ -29,19 +29,20 @@ public class Pun2GameLobby : MonoBehaviourPunCallbacks
 
     public override void OnDisconnected(DisconnectCause cause)
     {
-        Debug.Log("OnFailedToConnectToPhoton. StatusCode: " + cause.ToString() + " ServerAddress: " + PhotonNetwork.ServerAddress);
+        //Debug.Log("OnFailedToConnectToPhoton. StatusCode: " + cause.ToString() + " ServerAddress: " + PhotonNetwork.ServerAddress);
     }
 
     public override void OnConnectedToMaster()
     {
-        Debug.Log("OnConnectedToMaster");
+        //Debug.Log("OnConnectedToMaster");
         //After we connected to Master server, join the Lobby
-        PhotonNetwork.JoinLobby(TypedLobby.Default);
+        PhotonNetwork.JoinLobby();
+        PhotonNetwork.AutomaticallySyncScene = true;
     }
 
     public override void OnRoomListUpdate(List<RoomInfo> roomList)
     {
-        Debug.Log("Room List is updated");
+        //Debug.Log("Room List is updated");
         //After this callback, update the room list
         existingRooms = roomList;
     }
@@ -136,31 +137,31 @@ public class Pun2GameLobby : MonoBehaviourPunCallbacks
 
     public override void OnCreateRoomFailed(short returnCode, string message)
     {
-        Debug.Log("OnCreateRoomFailed got called. This can happen if the room exists (even if not visible). Try another room name.");
+        //Debug.Log("OnCreateRoomFailed got called. This can happen if the room exists (even if not visible). Try another room name.");
         joiningRoom = false;
     }
 
     public override void OnJoinRoomFailed(short returnCode, string message)
     {
-        Debug.Log("OnJoinRoomFailed got called. This can happen if the room is not existing or full or closed.");
+        //Debug.Log("OnJoinRoomFailed got called. This can happen if the room is not existing or full or closed.");
         joiningRoom = false;
     }
 
     public override void OnJoinRandomFailed(short returnCode, string message)
     {
-        Debug.Log("OnJoinRandomFailed got called. This can happen if the room is not existing or full or closed.");
+        //Debug.Log("OnJoinRandomFailed got called. This can happen if the room is not existing or full or closed.");
         joiningRoom = false;
     }
 
     public override void OnCreatedRoom()
     {
-        Debug.Log("OnCreatedRoom");
+        //Debug.Log("OnCreatedRoom");
         PhotonNetwork.NickName = playerName;
-        PhotonNetwork.LoadLevel("GameLevel");
+        PhotonNetwork.LoadLevel("test");
     }
 
     public override void OnJoinedRoom()
     {
-        Debug.Log("OnJoinedRoom");
+        //Debug.Log("OnJoinedRoom");
     }
 }
