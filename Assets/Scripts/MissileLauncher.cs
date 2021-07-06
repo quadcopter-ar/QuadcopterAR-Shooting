@@ -63,7 +63,7 @@ public class MissileLauncher : MonoBehaviour
             //missle.GetComponent<NormalModeMissileMovement>().SetFireDirection(this.FireDirection);
             Transform rotation = this.gameObject.transform;
 
-            missle.GetComponent<NormalModeMissileMovement>().Fire(rotation);
+            missle.GetComponent<NormalModeMissileMovement>().Fire(rotation,this.PV);
             Destroy(missle,15f);
         }
     }

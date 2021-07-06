@@ -6,25 +6,30 @@ using Photon.Pun;
 
 public class NormalModeMissileMovement : AbstractMissileMovement
 {
-    private PhotonView PV;
+    // private PhotonView PV;
     private Rigidbody RB;
     void Awake()
     {
         this.Speed = 100.0f;
-        this.PV = GetComponent<PhotonView>();
+        // this.PV = GetComponent<PhotonView>();
         this.RB = GetComponent<Rigidbody>();
     }
 
     void Start()
     {
+        // if(!PV.IsMine)
+        // {
+        //     Destroy(this.RB);
+        // }
+
+    }
+    public override void Fire(Transform rotation, PhotonView PV)
+    {
         if(!PV.IsMine)
         {
             Destroy(this.RB);
+            return;
         }
-
-    }
-    public override void Fire(Transform rotation)
-    {
         //this.GetComponent<Rigidbody>().AddForce(this.FireDirection*this.Speed);
 
         // Debug.Log(this.FireDirection*this.Speed);
