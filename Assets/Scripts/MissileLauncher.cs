@@ -1,18 +1,29 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
 public class MissileLauncher : MonoBehaviour
 {
     [SerializeField] private GameObject Missle;
     private Vector3 FireDirection;
     private AudioSource audioLocal;
+    private PhotonView PV;
 
     void Awake()
     {
         this.FireDirection = new Vector3(0.0f,0.0f,0.0f);
         audioLocal = gameObject.AddComponent<AudioSource>();
         audioLocal.volume = 0.5f;
+        this.PV = GetComponent<PhotonView>();  
+    }
+
+    void Start()
+    {
+        if (!this.PV.IsMine)
+        {
+          Destroy(GetComponentInChildren<Camera>().gameObject);
+        }
     }
 
     public void SetFireDirection(Vector3 fireDirection)
@@ -22,6 +33,10 @@ public class MissileLauncher : MonoBehaviour
      
     void Update()
     {
+        if(!this.PV.IsMine)
+        {
+            return;
+        }
         if(Input.GetButtonDown("Jump"))
         {
             GameObject player = GameObject.FindWithTag("PlayerMain");

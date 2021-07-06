@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR;
 using UnityEngine.InputSystem;
+using Photon.Pun;
 
 public class BasicMovement : MonoBehaviour
 {
@@ -22,6 +23,13 @@ public class BasicMovement : MonoBehaviour
 
     private AudioSource mainAudio;
 
+    private PhotonView PV;
+
+
+    void Awake()
+    {
+      this.PV = GetComponentInParent<PhotonView>();  
+    }
 
     void Start() {
         //Lets get all the devices we can find.
@@ -43,6 +51,10 @@ public class BasicMovement : MonoBehaviour
     }
 
     void Update() {
+        if(!PV.IsMine)
+        {
+          return;
+        }
         if(!debugMode){
             if (leftController == null) {
                 GetControllerDevices(leftControllerNode, ref leftController, ref leftInputDevices);
