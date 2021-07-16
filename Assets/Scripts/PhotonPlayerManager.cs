@@ -19,10 +19,10 @@ public class PhotonPlayerManager : MonoBehaviour
     void Start()
     {
 
-        if (PV.IsMine)
-        {
-            CreateController();
-        }
+        // if (PV.IsMine)
+        // {
+        //     CreateController();
+        // }
         
     }
 

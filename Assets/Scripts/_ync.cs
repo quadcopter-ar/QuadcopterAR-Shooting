@@ -58,7 +58,7 @@ public class _ync : MonoBehaviour
 
 	private int status = 0;
 
-	private Vector3 current_position = new Vector3(0, 0, 0);
+	private Vector3 current_position;
 	private Vector3 current_orientation = new Vector3(0, 0, 0);
 	private Vector3 target_displacement = new Vector3(0, 0, 0);
 	private Vector3 target_position = new Vector3(0, 1, 0);
@@ -74,6 +74,7 @@ public class _ync : MonoBehaviour
 
 		plane_texture = new Texture2D(2560, 720);
 		frame_queue = new Queue<byte[]>();
+		this.current_position = this.gameObject.transform.parent.transform.position;
 	}
 
     // Update is called once per frame

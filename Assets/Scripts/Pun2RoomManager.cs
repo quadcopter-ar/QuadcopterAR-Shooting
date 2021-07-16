@@ -4,6 +4,7 @@ using UnityEngine;
 using Photon.Pun;
 using UnityEngine.SceneManagement;
 using System.IO;
+using Photon.Realtime;
 public class Pun2RoomManager : MonoBehaviourPunCallbacks
 {
     public static Pun2RoomManager Instance;
@@ -35,7 +36,15 @@ public class Pun2RoomManager : MonoBehaviourPunCallbacks
     {
         if (scene.buildIndex == 1)
         {
-            PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs","PlayerManager"), Vector3.zero,Quaternion.identity);
+            if(PhotonNetwork.IsMasterClient){
+                GameObject quadCopter = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs","Player"), new Vector3(100f,0f,0f),Quaternion.Euler(0f,180f,0f));
+                Debug.Log(quadCopter.transform.position);
+            }
+            else
+            {
+                PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs","Player"), Vector3.zero,Quaternion.identity);
+                Debug.Log("isNotMasterClient");
+            }
             Debug.Log("in test scene");
 
         }
