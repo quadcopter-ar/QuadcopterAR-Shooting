@@ -37,7 +37,7 @@ public class Pun2RoomManager : MonoBehaviourPunCallbacks
         if (scene.buildIndex == 1)
         {
             if(PhotonNetwork.IsMasterClient){
-                GameObject quadCopter = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs","Player"), new Vector3(100f,0f,0f),Quaternion.Euler(0f,180f,0f));
+                GameObject quadCopter = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs","Player"), new Vector3(0f,1000f,0f),Quaternion.Euler(0f,180f,0f));
                 Debug.Log(quadCopter.transform.position);
             }
             else
