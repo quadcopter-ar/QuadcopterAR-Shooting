@@ -387,3 +387,4 @@ MonoBehaviour:
   xAngle: 0
   yAngle: 0
   zAngle: 0
+  stepSize: 1
