@@ -95,7 +95,7 @@ public class JoystickControl : MonoBehaviour
         this.XAngle = 0.0f;
         this.YAngle = 0.0f;
         this.ZAngle = 0.0f;
-        this.stepSize = 1.0f;
+        this.stepSize = 2.0f;
         this.lerpTimer = 0.0f;
     }
 
@@ -103,26 +103,34 @@ public class JoystickControl : MonoBehaviour
     void Update()
     {
 
-        if(Input.GetKeyDown(KeyCode.UpArrow))
+        if(Input.GetKey(KeyCode.UpArrow))
         {
             this.RollToFront();
         }
 
-        if(Input.GetKeyDown(KeyCode.DownArrow))
+        if(Input.GetKey(KeyCode.DownArrow))
         {
             this.RollToRear();
         }
 
-        if(Input.GetKeyDown(KeyCode.LeftArrow))
+        if(Input.GetKey(KeyCode.LeftArrow))
         {
             this.RollToLeft();
         }
 
-        if(Input.GetKeyDown(KeyCode.RightArrow))
+        if(Input.GetKey(KeyCode.RightArrow))
         {
             this.RollToRight();
-        }    
+        }
 
+        if(!Input.anyKey)
+        {
+            this.XAngle = 0.0f;
+            this.YAngle = 0.0f;
+            this.ZAngle = 0.0f;
+        }
+
+        this.gameObject.transform.rotation = Quaternion.Lerp(this.gameObject.transform.rotation, Quaternion.Euler(this.XAngle,this.YAngle,this.ZAngle), this.stepSize * Time.deltaTime);
     }
 
     void RollToLeft()
