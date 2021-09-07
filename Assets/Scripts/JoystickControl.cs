@@ -5,6 +5,7 @@ using UnityEngine;
 public class JoystickControl : MonoBehaviour
 {
     public float xAngle, yAngle, zAngle;
+    public string KeyUp, KeyDown, KeyLeft, KeyRight; 
     private float lerpTimer;
     public float stepSize;
     private float XAngle
@@ -103,22 +104,22 @@ public class JoystickControl : MonoBehaviour
     void Update()
     {
 
-        if(Input.GetKey(KeyCode.UpArrow))
+        if(Input.GetKey(this.KeyUp))
         {
             this.RollToFront();
         }
 
-        if(Input.GetKey(KeyCode.DownArrow))
+        if(Input.GetKey(this.KeyDown))
         {
             this.RollToRear();
         }
 
-        if(Input.GetKey(KeyCode.LeftArrow))
+        if(Input.GetKey(this.KeyLeft))
         {
             this.RollToLeft();
         }
 
-        if(Input.GetKey(KeyCode.RightArrow))
+        if(Input.GetKey(this.KeyRight))
         {
             this.RollToRight();
         }
