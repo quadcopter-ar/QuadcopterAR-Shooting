@@ -96,7 +96,7 @@ public class JoystickControl : MonoBehaviour
         this.XAngle = 0.0f;
         this.YAngle = 0.0f;
         this.ZAngle = 0.0f;
-        this.stepSize = 2.0f;
+        this.stepSize = 8.0f;
         this.lerpTimer = 0.0f;
     }
 
