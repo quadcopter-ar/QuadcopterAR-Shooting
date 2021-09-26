@@ -7,13 +7,19 @@ EditorBuildSettings:
   m_Scenes:
   - enabled: 0
     path: 
-    guid: 9fc0d4010bbf28b4594072e72b8655ab
+    guid: 00000000000000000000000000000000
   - enabled: 1
     path: Assets/Scenes/CreateRoom.unity
     guid: 850c19c1311308e4ba7a57c2225ad080
   - enabled: 1
     path: Assets/Scenes/test.unity
     guid: 73da24bfe492749ba9fe648418e6d480
+  - enabled: 0
+    path: Assets/Scenes/testforbasic.unity
+    guid: ddf607d1d9e6c5d4db003a8773fca261
+  - enabled: 0
+    path: Assets/Scenes/JoystickTest.unity
+    guid: c26950d639e07b54690784006aa84d39
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: 9c516d0716fd1d04b9857390ad6b2187, type: 2}
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: f7a525093f1eeaf408d92d5b9beb28e4, type: 2}

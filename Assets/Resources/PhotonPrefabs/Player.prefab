@@ -244,7 +244,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_CameraFloorOffsetObject: {fileID: 1864075826600205785}
   m_RequestedTrackingMode: 0
-  m_TrackingOriginMode: 1
+  m_TrackingOriginMode: 2
   m_TrackingSpace: 0
   m_CameraYOffset: 1.36144
 --- !u!1 &1864075826818219816
@@ -41504,6 +41504,10 @@ PrefabInstance:
     - target: {fileID: 1231480552441493585, guid: bd94daaa78cb83042a7144dbb87e750d, type: 3}
       propertyPath: KeyRight
       value: d
+      objectReference: {fileID: 0}
+    - target: {fileID: 1231480552441493585, guid: bd94daaa78cb83042a7144dbb87e750d, type: 3}
+      propertyPath: leftStickTrueRightStickFalse
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1629635063789310020, guid: bd94daaa78cb83042a7144dbb87e750d, type: 3}
       propertyPath: m_RootOrder
