@@ -25,6 +25,7 @@ public class CreateCurvedPlane : MonoBehaviour {
 
 		curved_plane = new GameObject("Right_Curved_Plane");
 		curved_plane.transform.parent = this.transform;
+		curved_plane.transform.position = Vector3.zero;
 		curved_plane.layer = 10;
 		MeshRenderer mr = curved_plane.AddComponent<MeshRenderer>();
 		mr.material.shader = Shader.Find("Standard");
@@ -86,6 +87,7 @@ public class CreateCurvedPlane : MonoBehaviour {
 
 		left_plane = Instantiate(curved_plane);
 		left_plane.name = "Left_Curved_Plane";
+		left_plane.transform.position = curved_plane.transform.position;
 		left_plane.transform.parent = this.transform;
 		left_plane.layer = 9;
 	}
