@@ -8,23 +8,24 @@ public class JoystickControl : MonoBehaviour
 {
 
     // oculus setup
-    private float deadZoneAmount = 0.5f;
-    public bool debugMode = false;
-    private XRNode leftControllerNode = XRNode.LeftHand;
-    private List<UnityEngine.XR.InputDevice> leftInputDevices = new List<UnityEngine.XR.InputDevice>();
-    private UnityEngine.XR.InputDevice leftController;
-    private XRNode rightControllerNode = XRNode.RightHand;
-    private List<UnityEngine.XR.InputDevice> rightInputDevices = new List<UnityEngine.XR.InputDevice>();
-    private UnityEngine.XR.InputDevice rightController;
+    private float deadZoneAmount = 0.5f; // deadzone that the oculus joystick can't reach
+    public bool debugMode = false; //debug mode trigger
+    private XRNode leftControllerNode = XRNode.LeftHand; // left controller node object
+    private List<UnityEngine.XR.InputDevice> leftInputDevices = new List<UnityEngine.XR.InputDevice>(); // left input devices object
+    private UnityEngine.XR.InputDevice leftController; // left controller
+    private XRNode rightControllerNode = XRNode.RightHand; // right controller node object
+
+    private List<UnityEngine.XR.InputDevice> rightInputDevices = new List<UnityEngine.XR.InputDevice>(); // right input devices object
+    private UnityEngine.XR.InputDevice rightController; // right controller
 
     // joystick control setup
-    public float xAngle, yAngle, zAngle;
+    public float xAngle, yAngle, zAngle; // three-dimentional angle variable for rotation of the joystick
 
-    public bool leftStickTrueRightStickFalse;
-    public string KeyUp, KeyDown, KeyLeft, KeyRight; 
-    private float lerpTimer;
-    public float stepSize;
-    private float XAngle
+    public bool leftStickTrueRightStickFalse; // tell the script the script is attached to joystick prefab for left controller or right controller
+    public string KeyUp, KeyDown, KeyLeft, KeyRight;  // define the key to press for moving the joystick up/down/left/right when pressing keyboard
+    private float lerpTimer; // a timer for lerping
+    public float stepSize; // defines the strength of simulating the joystick rotation. The higher the more rapid joystick movement is shown in the game.
+    private float XAngle // XAngle getter-setter
     {
         get
         {
@@ -32,7 +33,7 @@ public class JoystickControl : MonoBehaviour
         }
         set
         {
-            if(value > 90.0f)
+            if(value > 90.0f) // max is 90 degree for X angle rotation
             {
                 xAngle = 90.0f;
             }
@@ -49,7 +50,7 @@ public class JoystickControl : MonoBehaviour
         }
     }
 
-    private float YAngle
+    private float YAngle // YAngle getter-setter
     {
         get
         {
@@ -57,7 +58,7 @@ public class JoystickControl : MonoBehaviour
         }
         set
         {
-            if(value > 90.0f)
+            if(value > 90.0f) // max is 90 degree for Y angle rotation
             {
                 yAngle = 90.0f;
             }
@@ -74,7 +75,7 @@ public class JoystickControl : MonoBehaviour
         }
     }
 
-    private float ZAngle
+    private float ZAngle // Z angle getter-setter
     {
         get
         {
@@ -82,7 +83,7 @@ public class JoystickControl : MonoBehaviour
         }
         set
         {
-            if(value > 90.0f)
+            if(value > 90.0f) // max is 90 degree for Y angle rotation
             {
                 zAngle = 90.0f;
             }
@@ -100,22 +101,23 @@ public class JoystickControl : MonoBehaviour
     }
 
 
-    private Vector3 JoystickEulerAngles;
+    private Vector3 JoystickEulerAngles; // for rotation, we use Euler system on unity
     void Awake()
     {
-        this.JoystickEulerAngles = this.transform.rotation.eulerAngles;
+        this.JoystickEulerAngles = this.transform.rotation.eulerAngles; // get the eulerAngle component
 
     }
     // Start is called before the first frame update
     void Start()
     {
+        //initialization
         this.XAngle = 0.0f;
         this.YAngle = 0.0f;
         this.ZAngle = 0.0f;
         this.stepSize = 8.0f;
         this.lerpTimer = 0.0f;
         if (!debugMode){
-          GetDevices();
+          GetDevices(); //get device for left controller or right controller or both
         }
     }
 
@@ -123,13 +125,13 @@ public class JoystickControl : MonoBehaviour
     void Update()
     {
         // oculus joystick connection
-        if(!debugMode){
+        if(!debugMode){ 
             if (leftController == null) {
-                GetControllerDevices(leftControllerNode, ref leftController, ref leftInputDevices);
+                GetControllerDevices(leftControllerNode, ref leftController, ref leftInputDevices); // for get left controller
             }
 
             if (rightController == null) {
-                GetControllerDevices(rightControllerNode, ref rightController, ref rightInputDevices);
+                GetControllerDevices(rightControllerNode, ref rightController, ref rightInputDevices); // for get right controller
             }
             // content for joystick motion detection
             CheckForChanges();
@@ -157,13 +159,13 @@ public class JoystickControl : MonoBehaviour
         //     this.RollToRight();
         // }
 
-        if(!Input.anyKey)
+        if(!Input.anyKey) // when joystick is still, we set angles back to 0, so the joystick in the game will be set back to its center
         {
             this.XAngle = 0.0f;
             this.YAngle = 0.0f;
             this.ZAngle = 0.0f;
         }
-
+        //lerp the Euler rotation so that the joystick in the game can be rotated smoothly
         this.gameObject.transform.rotation = Quaternion.Lerp(this.gameObject.transform.rotation, Quaternion.Euler(this.XAngle,this.YAngle,this.ZAngle), this.stepSize * Time.deltaTime);
     }
 
@@ -182,7 +184,7 @@ public class JoystickControl : MonoBehaviour
     }
 
 
-    void CheckForChanges() {
+    void CheckForChanges() { //check for control changes
         Vector2 leftTouchCoords;
         Vector2 rightTouchCoords;
         bool triggerVal;
@@ -216,18 +218,18 @@ public class JoystickControl : MonoBehaviour
                 Debug.Log("We moving with right controller");
                 if(rightTouchCoords.x < -deadZoneAmount){
                 //   RotateLeft(rightTouchCoords.x);
-                    this.RollToLeft();
+                    this.RollToLeft(); // update angles when joystick is moving to left
                 }else if(rightTouchCoords.x > deadZoneAmount){
                 //   RotateRight(rightTouchCoords.x);
-                    this.RollToRight();
+                    this.RollToRight(); // update angles when joystick is moving to right
                 }
 
                 if (rightTouchCoords.y < -deadZoneAmount) {
                 //   MoveDown(rightTouchCoords.y);
-                    this.RollToRear();
+                    this.RollToRear(); // update angles when joystick is moving to down
                 } else if (rightTouchCoords.y > deadZoneAmount) {
                 //   MoveUp(rightTouchCoords.y);
-                    this.RollToFront();
+                    this.RollToFront(); // update angles when joystick is moving to up
                 }
             }
  
@@ -251,22 +253,22 @@ public class JoystickControl : MonoBehaviour
         }
     }
 
-    void RollToLeft()
+    void RollToLeft() // update Z angle when rolling the joystick to left
     {
         this.ZAngle += this.stepSize;
     }
 
-    void RollToRight()
+    void RollToRight() // update Z angle when rolling the joystick to right
     {
         this.ZAngle -= this.stepSize;
     }
 
-    void RollToFront()
+    void RollToFront() // update X angle when rolling the joystick to up
     {
         this.XAngle += this.stepSize;
     }
 
-    void RollToRear()
+    void RollToRear() // update X angle when rolling the joystick to down
     {
         this.XAngle -= this.stepSize;
     }

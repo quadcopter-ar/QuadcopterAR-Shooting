@@ -10,9 +10,9 @@ namespace MissleFactory
     public abstract class AbstractMissileMovement : MonoBehaviour
     {
         
-        protected float Speed;
-        protected Vector3 FireDirection;
-        public abstract void Fire(Transform rotation, PhotonView PV);
+        protected float Speed; // abstract member of missile flying speed
+        protected Vector3 FireDirection; // abstract member of missile for flying direction
+        public abstract void Fire(Transform rotation, PhotonView PV); // abstract member of missile for fire triggering
 
     }
 

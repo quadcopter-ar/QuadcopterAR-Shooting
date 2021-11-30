@@ -52,6 +52,20 @@ The following are the relevant scripts:
 - `AbstractCameraController.cs` and `QuadcopterCameraController.cs`: for some addition control on console position and some basic work
 - `CrossHair.cs`: for controlling the crosshair
 - `HealthBar.cs`: for controlling the health bar and UI text
+- `BasicMovement.cs`: for controlling the quadcopter in the game by oculus controller.
+- `NetworkController.cs`: A network controller for photon, it calls photon api to establish photon's multiplayer network. When multiplayer network are established and players enter into the game room, it will print out debug info to ensure network is established.
+- `JoystickControl.cs`: a script to control the joystick prefab in the game. It basically use Lerp for linear interpolation of the rotation of joystick prefab. User can set the rotation strength by changing the stepSize variable in unity and leftStickTrueRightStickFalse variable to select if the prefab is for left joy stick or right joystick.
+- `MissileLauncher.cs`: a script used for missile launching motion. It detects oculus controller and fires a missile when user press "fire" button. It uses `NormalModeMissileMovement.cs` as default firing mode of the missile in the game. Users can define different speeds and effects of the missile by creating and deriving a similar script and enable it in `MissileLauncher.cs` from `AbstractCameraController.cs`.
+- `NormalModeMissileMovement.cs`: a script that defines the speed and effect of the missile fired by normal mode in the game. Currently, this is the only firing mode in the game.
+- `AbstractCameraController.cs`: a script that defines the abstract class for missile movement modes in the game.
+- `Pun2RoomManager.cs`: a script used for establishing a game room manager using Pun2 Engine.
+- `CreateCurvedPlane.cs`: a script to project video from the camera on the quadcopter in the real-life to the game. For more info, please contact Jim.
+- `CurvedPlanePositioner.cs`: a script to position the above curve plane. For more info, please contact Jim.
+- `PhotonPlayerManager.cs`: a script used for player management by Pun2 Engine Api.
+- `Pun2GameLobby.cs`: a script to create a Pun2 UI game lobby and allows users to join the game room.
+- `_ync.cs`: a utility script to create connection for the sync of the quadcopter in real-life and the game. For more info, please contact Jim.
+- `server.cs`: a server for connecting game and the quadcopter in real-life. For more info, please contact Jim.
+
 
 The following are the relevant fbx objects (unfortunately, due to the fact that unity doesn't support some of the materials I used in blender, so it is not as `fancy` as it looks in blender):
 - `console` : spaceship fbx object imported from blender after the 3d model is developed and render

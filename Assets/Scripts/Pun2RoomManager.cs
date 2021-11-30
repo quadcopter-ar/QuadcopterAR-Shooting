@@ -36,13 +36,13 @@ public class Pun2RoomManager : MonoBehaviourPunCallbacks
     {
         if (scene.buildIndex == 1)
         {
-            if(PhotonNetwork.IsMasterClient){
-                GameObject quadCopter = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs","Player"), new Vector3(0f,1000f,0f),Quaternion.Euler(0f,180f,0f));
+            if(PhotonNetwork.IsMasterClient){ //check if the current script is using for master client or sub clients
+                GameObject quadCopter = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs","Player"), new Vector3(0f,1000f,0f),Quaternion.Euler(0f,180f,0f)); //instantiate player
                 Debug.Log(quadCopter.transform.position);
             }
             else
             {
-                PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs","Player"), Vector3.zero,Quaternion.identity);
+                PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs","Player"), Vector3.zero,Quaternion.identity); //instantiate player
                 Debug.Log("isNotMasterClient");
             }
             Debug.Log("in test scene");

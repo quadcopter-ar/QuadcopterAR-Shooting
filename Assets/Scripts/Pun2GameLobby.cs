@@ -36,7 +36,7 @@ public class Pun2GameLobby : MonoBehaviourPunCallbacks
     {
         //Debug.Log("OnConnectedToMaster");
         //After we connected to Master server, join the Lobby
-        PhotonNetwork.JoinLobby();
+        PhotonNetwork.JoinLobby(); 
         PhotonNetwork.AutomaticallySyncScene = true;
     }
 
@@ -52,14 +52,14 @@ public class Pun2GameLobby : MonoBehaviourPunCallbacks
         GUI.Window(0, new Rect(0, 0, Screen.width, Screen.height), LobbyWindow, "Game Rooms");
     }
 
-    void LobbyWindow(int index)
+    void LobbyWindow(int index) // creating the GUI
     {
         //Connection Status and Room creation Button
         GUILayout.BeginHorizontal();
 
         GUILayout.Label("Pun 2 lobby Status: " + PhotonNetwork.NetworkClientState);
 
-        if (joiningRoom || !PhotonNetwork.IsConnected || PhotonNetwork.NetworkClientState != ClientState.JoinedLobby)
+        if (joiningRoom || !PhotonNetwork.IsConnected || PhotonNetwork.NetworkClientState != ClientState.JoinedLobby) // check for different room joining or lobby joining or network states
         {
             GUI.enabled = false;
         }
@@ -69,7 +69,7 @@ public class Pun2GameLobby : MonoBehaviourPunCallbacks
         //Room name text field
         roomName = GUILayout.TextField(roomName, GUILayout.Width(Screen.width/2));
 
-        if (GUILayout.Button("Create Room", GUILayout.Width(125)))
+        if (GUILayout.Button("Create Room", GUILayout.Width(125))) //  room button
         {
             if (roomName != "")
             {
@@ -88,7 +88,7 @@ public class Pun2GameLobby : MonoBehaviourPunCallbacks
 
         roomListScroll = GUILayout.BeginScrollView(roomListScroll, true, true);
 
-        for (int i = 0; i < existingRooms.Count; i++)
+        for (int i = 0; i < existingRooms.Count; i++) // populating rooms to the GUI
         {
             GUILayout.BeginHorizontal("box");
             GUILayout.Label(existingRooms[i].Name, GUILayout.Width(400));
@@ -112,7 +112,7 @@ public class Pun2GameLobby : MonoBehaviourPunCallbacks
         GUILayout.FlexibleSpace();
 
         GUI.enabled = (PhotonNetwork.NetworkClientState == ClientState.JoinedLobby || PhotonNetwork.NetworkClientState == ClientState.Disconnected) && !joiningRoom;
-        if (GUILayout.Button("Refresh", GUILayout.Width(100)))
+        if (GUILayout.Button("Refresh", GUILayout.Width(100))) // create refresh button for refreshing
         {
             if (PhotonNetwork.IsConnected)
             {
@@ -131,36 +131,36 @@ public class Pun2GameLobby : MonoBehaviourPunCallbacks
         if (joiningRoom)
         {
             GUI.enabled = true;
-            GUI.Label(new Rect(900 / 2 - 50, 400 / 2 - 10, 100, 20), "Connecting...");
+            GUI.Label(new Rect(900 / 2 - 50, 400 / 2 - 10, 100, 20), "Connecting..."); // update messgae to connecting on the GUI when connectioln is establishing
         }
     }
 
-    public override void OnCreateRoomFailed(short returnCode, string message)
+    public override void OnCreateRoomFailed(short returnCode, string message) // when we can't create room
     {
         //Debug.Log("OnCreateRoomFailed got called. This can happen if the room exists (even if not visible). Try another room name.");
         joiningRoom = false;
     }
 
-    public override void OnJoinRoomFailed(short returnCode, string message)
+    public override void OnJoinRoomFailed(short returnCode, string message) // when join room fail
     {
         //Debug.Log("OnJoinRoomFailed got called. This can happen if the room is not existing or full or closed.");
         joiningRoom = false;
     }
 
-    public override void OnJoinRandomFailed(short returnCode, string message)
+    public override void OnJoinRandomFailed(short returnCode, string message) // when join random fail
     {
         //Debug.Log("OnJoinRandomFailed got called. This can happen if the room is not existing or full or closed.");
         joiningRoom = false;
     }
 
-    public override void OnCreatedRoom()
+    public override void OnCreatedRoom() // on joined room state
     {
         //Debug.Log("OnCreatedRoom");
         PhotonNetwork.NickName = playerName;
-        PhotonNetwork.LoadLevel("test");
+        PhotonNetwork.LoadLevel("test"); // we load the test level (stage) into the game
     }
 
-    public override void OnJoinedRoom()
+    public override void OnJoinedRoom() // on joined room state
     {
         //Debug.Log("OnJoinedRoom");
     }
